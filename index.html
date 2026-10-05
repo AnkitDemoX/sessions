@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Reports & Documentation Templates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .color-picker-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .color-picker-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .custom-color-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .custom-color-input label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .custom-color-input input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .custom-color-input input[type="text"] {
+            flex: 0 0 120px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+
+        .custom-color-input button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .custom-color-input button:hover {
+            background: #5568d3;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-top: 4px solid #667eea;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .template-card.case-study {
+            border-top-color: #dc3545;
+        }
+
+        .template-card.debriefing {
+            border-top-color: #0066cc;
+        }
+
+        .template-card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .template-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .template-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .meta-tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .btn-case-study {
+            background: #dc3545;
+        }
+
+        .btn-case-study:hover {
+            background: #c82333;
+        }
+
+        .btn-debriefing {
+            background: #0066cc;
+        }
+
+        .btn-debriefing:hover {
+            background: #004b99;
+        }
+
+        .template-links {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .template-links h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .template-link-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .template-link-item:last-child {
+            border-bottom: none;
+        }
+
+        .template-link-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .template-link-item a:hover {
+            color: #5568d3;
+            text-decoration: underline;
+        }
+
+        .badge {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Meeting Reports & Documentation Templates</h1>
+            <p>Select a template and upload your client logos to customize your reports</p>
+        </header>
+
+        <!-- Color Picker Section -->
+        <div class="color-picker-section">
+            <h2>🎨 Customize Header Color</h2>
+            <p style="color: #666; margin-bottom: 15px;">Enter a hex color code or use the color picker to customize the header color for your organization's branding:</p>
+
+            <div class="custom-color-input">
+                <label for="customColor">Header Color:</label>
+                <input type="color" id="customColor" value="#0066CC" onchange="updateHeaderColor(this.value)">
+                <input type="text" id="customColorHex" placeholder="#0066CC" value="#0066CC" onchange="updateHeaderColor(this.value)">
+                <button onclick="applyCustomColor()">Apply Color</button>
+            </div>
+            <small style="color: #999; margin-top: 10px; display: block;">
+                Examples: #0066CC (Pega Blue), #dc3545 (MUFG Red), #667eea (Purple), #28a745 (Green)
+            </small>
+        </div>
+
+        <!-- Templates Grid -->
+        <div class="templates-grid">
+            <!-- Case Study Template -->
+            <div class="template-card case-study">
+                <h2>📊 Case Study Template</h2>
+                <p>Professional project case study and impact report. Perfect for showcasing client success stories, project deliverables, and business impact with metrics.</p>
+                <div class="template-meta">
+                    <span class="meta-tag">📈 Metrics & KPIs</span>
+                    <span class="meta-tag">🎯 Team Contribution</span>
+                    <span class="meta-tag">💡 Impact Analysis</span>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-case-study" onclick="openTemplate('case-study-template.html')">Open Template</button>
+                    <button class="btn btn-secondary" onclick="downloadTemplate('case-study-template.html')">Download</button>
+                </div>
+            </div>
+
+            <!-- Debriefing Template -->
+            <div class="template-card debriefing">
+                <h2>🔍 Debriefing Report Template</h2>
+                <p>Comprehensive post-meeting analysis and team feedback document. Includes detailed sections for observations, improvements, and lessons learned with image gallery support.</p>
+                <div class="template-meta">
+                    <span class="meta-tag">📸 Image Gallery</span>
+                    <span class="meta-tag">💬 Feedback Sections</span>
+                    <span class="meta-tag">✅ Action Items</span>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-debriefing" onclick="openTemplate('debriefing-template.html')">Open Template</button>
+                    <button class="btn btn-secondary" onclick="downloadTemplate('debriefing-template.html')">Download</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template Links Section -->
+        <div class="template-links">
+            <h2>📁 Available Templates</h2>
+            <div class="template-link-item">
+                <div>
+                    <strong>Case Study Template</strong>
+                    <p style="color: #999; margin: 5px 0 0 0; font-size: 0.9em;">Showcase project success and business impact</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="case-study-template.html" target="_blank">Open →</a>
+                    <span class="badge">New</span>
+                </div>
+            </div>
+            <div class="template-link-item">
+                <div>
+                    <strong>Debriefing Report Template</strong>
+                    <p style="color: #999; margin: 5px 0 0 0; font-size: 0.9em;">Post-meeting analysis and team feedback</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="debriefing-template.html" target="_blank">Open →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💡 Select a template above and upload your logos to customize for your organization!</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Created by Demo X Organization | Last Updated: October 4, 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Load saved color from localStorage
+        function loadSavedColor() {
+            const savedColor = localStorage.getItem('headerColor');
+            if (savedColor) {
+                document.getElementById('customColor').value = savedColor;
+                document.getElementById('customColorHex').value = savedColor;
+            }
+        }
+
+        // Update header color and save to localStorage
+        function updateHeaderColor(color) {
+            localStorage.setItem('headerColor', color);
+            document.getElementById('customColor').value = color;
+            document.getElementById('customColorHex').value = color.toUpperCase();
+        }
+
+        // Apply custom color
+        function applyCustomColor() {
+            const customColor = document.getElementById('customColorHex').value;
+            if (/^#[0-9A-F]{6}$/i.test(customColor)) {
+                updateHeaderColor(customColor);
+                alert('✅ Color saved! Open a template to apply it.');
+            } else {
+                alert('❌ Please enter a valid hex color (e.g., #0066CC)');
+            }
+        }
+
+        // Open template with saved color
+        function openTemplate(templateFile) {
+            const color = localStorage.getItem('headerColor') || '#0066CC';
+            window.location.href = templateFile + '?color=' + encodeURIComponent(color);
+        }
+
+        // Download template
+        function downloadTemplate(templateFile) {
+            const link = document.createElement('a');
+            link.href = templateFile;
+            link.download = templateFile;
+            link.click();
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedColor();
+        });
+    </script>
+</body>
+</html>
